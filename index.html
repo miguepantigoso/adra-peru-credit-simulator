@@ -6,6 +6,7 @@
   <title>ADRA SMARTH - Simulador</title>
 
   <style>
+
     *{
       margin:0;
       padding:0;
@@ -29,6 +30,7 @@
     }
 
     /* HEADER */
+
     .header{
       background:linear-gradient(to right,#0f172a,#1d4ed8);
       color:white;
@@ -57,6 +59,7 @@
     }
 
     /* LAYOUT */
+
     .layout{
       display:grid;
       grid-template-columns:1fr 2fr;
@@ -65,6 +68,7 @@
     }
 
     /* CARD */
+
     .card{
       background:#f8fafc;
       border:1px solid #e2e8f0;
@@ -96,12 +100,14 @@
       border:1px solid #cbd5e1;
       border-radius:14px;
       font-size:15px;
+      transition:.2s;
     }
 
     input:focus,
     select:focus{
       outline:none;
       border-color:#2563eb;
+      box-shadow:0 0 0 3px rgba(37,99,235,.15);
     }
 
     button{
@@ -119,9 +125,11 @@
 
     button:hover{
       background:#1e3a8a;
+      transform:translateY(-1px);
     }
 
     /* RESULTADOS */
+
     .results{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -164,6 +172,7 @@
     }
 
     /* TABLA */
+
     .table-container{
       background:white;
       border-radius:20px;
@@ -180,6 +189,11 @@
       align-items:center;
     }
 
+    .table-scroll{
+      max-height:435px;
+      overflow-y:auto;
+    }
+
     table{
       width:100%;
       border-collapse:collapse;
@@ -187,6 +201,13 @@
 
     thead{
       background:#f1f5f9;
+    }
+
+    thead th{
+      position:sticky;
+      top:0;
+      background:#f1f5f9;
+      z-index:10;
     }
 
     th,
@@ -201,6 +222,8 @@
       background:#f8fafc;
     }
 
+    /* FOOTER */
+
     .footer{
       margin-top:20px;
       background:#f8fafc;
@@ -210,6 +233,8 @@
       color:#475569;
       font-size:14px;
     }
+
+    /* RESPONSIVE */
 
     @media(max-width:900px){
 
@@ -226,7 +251,9 @@
         gap:16px;
         align-items:flex-start;
       }
+
     }
+
   </style>
 </head>
 
@@ -235,7 +262,9 @@
 <div class="container">
 
   <!-- HEADER -->
+
   <div class="header">
+
     <div>
       <h1>ADRA SMARTH</h1>
       <p>Simulador Profesional de Créditos</p>
@@ -244,12 +273,15 @@
     <div class="badge">
       Sistema Financiero
     </div>
+
   </div>
 
   <!-- MAIN -->
+
   <div class="layout">
 
     <!-- LEFT -->
+
     <div>
 
       <div class="card">
@@ -257,48 +289,58 @@
         <h2>Datos del Crédito</h2>
 
         <div class="form-group">
+
           <label>Tipo de Crédito</label>
+
           <select id="tipoCredito">
             <option>Crédito Grupal</option>
             <option>Crédito Personal</option>
             <option>Crédito Negocio</option>
             <option>Crédito Consumo</option>
           </select>
+
         </div>
 
         <div class="form-group">
+
           <label>Monto del Crédito</label>
+
           <input
             type="number"
             id="monto"
-            placeholder="10000"
-            value="10000"
+            placeholder="Ingrese el monto de credito"
           />
+
         </div>
 
         <div class="form-group">
+
           <label>Tasa Efectiva Anual (TEA)</label>
+
           <input
             type="number"
             id="tea"
-            placeholder="24"
-            value="24"
+            placeholder="Ingrese el TEA"
           />
+
         </div>
 
         <div class="form-group">
+
           <label>Plazo en Meses</label>
 
           <select id="plazo">
             <option value="6">6 meses</option>
-            <option value="12" selected>12 meses</option>
+            <option value="12">12 meses</option>
             <option value="18">18 meses</option>
             <option value="24">24 meses</option>
             <option value="36">36 meses</option>
           </select>
+
         </div>
 
         <div class="form-group">
+
           <label>Frecuencia de Pago</label>
 
           <select id="frecuencia">
@@ -306,6 +348,7 @@
             <option value="24">Quincenal</option>
             <option value="48">Semanal</option>
           </select>
+
         </div>
 
         <button onclick="simularCredito()">
@@ -317,63 +360,77 @@
     </div>
 
     <!-- RIGHT -->
+
     <div>
 
       <!-- RESULTADOS -->
+
       <div class="results">
 
         <div class="result-card blue">
           <p>Cuota</p>
-          <h3 id="cuota">S/ 0</h3>
+          <h3 id="cuota">--</h3>
         </div>
 
         <div class="result-card green">
           <p>Total Pagado</p>
-          <h3 id="total">S/ 0</h3>
+          <h3 id="total">--</h3>
         </div>
 
         <div class="result-card orange">
           <p>Intereses</p>
-          <h3 id="interes">S/ 0</h3>
+          <h3 id="interes">--</h3>
         </div>
 
       </div>
 
       <!-- TABLA -->
+
       <div class="table-container">
 
         <div class="table-header">
+
           <h2>Cronograma de Pagos</h2>
 
           <div class="badge">
             Calendario Financiero
           </div>
+
         </div>
 
-        <table>
+        <div class="table-scroll">
 
-          <thead>
-            <tr>
-              <th>N°</th>
-              <th>Cuota</th>
-              <th>Capital</th>
-              <th>Interés</th>
-              <th>Saldo</th>
-            </tr>
-          </thead>
+          <table>
 
-          <tbody id="tablaBody">
+            <thead>
 
-          </tbody>
+              <tr>
+                <th>N°</th>
+                <th>Cuota</th>
+                <th>Capital</th>
+                <th>Interés</th>
+                <th>Saldo</th>
+              </tr>
 
-        </table>
+            </thead>
+
+            <tbody id="tablaBody">
+
+            </tbody>
+
+          </table>
+
+        </div>
 
       </div>
 
       <!-- FOOTER -->
+
       <div class="footer">
+
         Este simulador financiero ADRA SMARTH permite proyectar cuotas,
         intereses y cronogramas de pago automáticamente.
+
       </div>
 
     </div>
@@ -384,119 +441,125 @@
 
 <script>
 
-function formatoMoneda(numero){
+  function formatoMoneda(numero){
 
-  return numero.toLocaleString("es-PE",{
-    style:"currency",
-    currency:"PEN"
-  });
+    return numero.toLocaleString("es-PE",{
+      style:"currency",
+      currency:"PEN"
+    });
 
-}
-
-function simularCredito(){
-
-  // DATOS
-  const monto = parseFloat(
-    document.getElementById("monto").value
-  );
-
-  const tea = parseFloat(
-    document.getElementById("tea").value
-  );
-
-  const plazoMeses = parseInt(
-    document.getElementById("plazo").value
-  );
-
-  const frecuencia = parseInt(
-    document.getElementById("frecuencia").value
-  );
-
-  // VALIDACION
-  if(!monto || !tea || !plazoMeses){
-
-    alert("Completa todos los campos");
-
-    return;
   }
 
-  // CANTIDAD DE CUOTAS
-  const cuotasTotales =
-    (plazoMeses / 12) * frecuencia;
+  function simularCredito(){
 
-  // TASA POR PERIODO
-  const tasaPeriodo =
-    Math.pow(1 + (tea / 100), 1 / frecuencia) - 1;
+    const monto =
+      parseFloat(
+        document.getElementById("monto").value
+      );
 
-  // FORMULA CUOTA
-  const cuota =
-    monto *
-    (
-      tasaPeriodo *
-      Math.pow(1 + tasaPeriodo, cuotasTotales)
-    ) /
-    (
-      Math.pow(1 + tasaPeriodo, cuotasTotales) - 1
-    );
+    const tea =
+      parseFloat(
+        document.getElementById("tea").value
+      );
 
-  // TOTALES
-  const totalPagado =
-    cuota * cuotasTotales;
+    const plazoMeses =
+      parseInt(
+        document.getElementById("plazo").value
+      );
 
-  const intereses =
-    totalPagado - monto;
+    const frecuencia =
+      parseInt(
+        document.getElementById("frecuencia").value
+      );
 
-  // MOSTRAR RESULTADOS
-  document.getElementById("cuota").innerText =
-    formatoMoneda(cuota);
+    if(!monto || !tea || !plazoMeses){
 
-  document.getElementById("total").innerText =
-    formatoMoneda(totalPagado);
+      alert("Completa todos los campos");
 
-  document.getElementById("interes").innerText =
-    formatoMoneda(intereses);
-
-  // TABLA
-  const tbody =
-    document.getElementById("tablaBody");
-
-  tbody.innerHTML = "";
-
-  let saldo = monto;
-
-  for(let i = 1; i <= cuotasTotales; i++){
-
-    const interesPeriodo =
-      saldo * tasaPeriodo;
-
-    const capital =
-      cuota - interesPeriodo;
-
-    saldo =
-      saldo - capital;
-
-    if(saldo < 0){
-      saldo = 0;
+      return;
     }
 
-    const fila = `
-      <tr>
-        <td>${i}</td>
-        <td>${formatoMoneda(cuota)}</td>
-        <td>${formatoMoneda(capital)}</td>
-        <td>${formatoMoneda(interesPeriodo)}</td>
-        <td>${formatoMoneda(saldo)}</td>
-      </tr>
-    `;
+    // TOTAL DE CUOTAS
 
-    tbody.innerHTML += fila;
+    const cuotasTotales =
+      (plazoMeses / 12) * frecuencia;
+
+    // TASA POR PERIODO
+
+    const tasaPeriodo =
+      Math.pow(
+        1 + (tea / 100),
+        1 / frecuencia
+      ) - 1;
+
+    // FORMULA FINANCIERA
+
+    const cuota =
+      monto *
+      (
+        tasaPeriodo *
+        Math.pow(1 + tasaPeriodo, cuotasTotales)
+      ) /
+      (
+        Math.pow(1 + tasaPeriodo, cuotasTotales) - 1
+      );
+
+    const totalPagado =
+      cuota * cuotasTotales;
+
+    const intereses =
+      totalPagado - monto;
+
+    // RESULTADOS
+
+    document.getElementById("cuota").innerText =
+      formatoMoneda(cuota);
+
+    document.getElementById("total").innerText =
+      formatoMoneda(totalPagado);
+
+    document.getElementById("interes").innerText =
+      formatoMoneda(intereses);
+
+    // TABLA
+
+    const tbody =
+      document.getElementById("tablaBody");
+
+    tbody.innerHTML = "";
+
+    let saldo = monto;
+
+    for(let i = 1; i <= cuotasTotales; i++){
+
+      const interesPeriodo =
+        saldo * tasaPeriodo;
+
+      const capital =
+        cuota - interesPeriodo;
+
+      saldo =
+        saldo - capital;
+
+      if(saldo < 0){
+        saldo = 0;
+      }
+
+      const fila = `
+        <tr>
+          <td>${i}</td>
+          <td>${formatoMoneda(cuota)}</td>
+          <td>${formatoMoneda(capital)}</td>
+          <td>${formatoMoneda(interesPeriodo)}</td>
+          <td>${formatoMoneda(saldo)}</td>
+        </tr>
+      `;
+
+      tbody.innerHTML += fila;
+
+    }
 
   }
-
-}
-
-// AUTO LOAD
-simularCredito();
 
 </script>
 
