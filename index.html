@@ -308,7 +308,7 @@
           <input
             type="number"
             id="monto"
-            placeholder="Ingrese el monto de credito"
+            placeholder="Ingrese el monto de crédito"
           />
 
         </div>
@@ -330,11 +330,26 @@
           <label>Plazo en Meses</label>
 
           <select id="plazo">
+
+            <option value="1">1 mes</option>
+            <option value="2">2 meses</option>
+            <option value="3">3 meses</option>
+            <option value="4">4 meses</option>
+            <option value="5">5 meses</option>
             <option value="6">6 meses</option>
+            <option value="7">7 meses</option>
+            <option value="8">8 meses</option>
+            <option value="9">9 meses</option>
+            <option value="10">10 meses</option>
+            <option value="11">11 meses</option>
             <option value="12">12 meses</option>
+            <option value="13">13 meses</option>
+            <option value="14">14 meses</option>
+            <option value="15">15 meses</option>
+            <option value="16">16 meses</option>
+            <option value="17">17 meses</option>
             <option value="18">18 meses</option>
-            <option value="24">24 meses</option>
-            <option value="36">36 meses</option>
+
           </select>
 
         </div>
@@ -479,10 +494,25 @@
       return;
     }
 
-    // TOTAL DE CUOTAS
+    // TOTAL CUOTAS
 
-    const cuotasTotales =
-      (plazoMeses / 12) * frecuencia;
+    let cuotasTotales;
+
+    if(frecuencia == 12){
+
+      cuotasTotales = plazoMeses;
+
+    }
+    else if(frecuencia == 24){
+
+      cuotasTotales = plazoMeses * 2;
+
+    }
+    else if(frecuencia == 48){
+
+      cuotasTotales = plazoMeses * 4;
+
+    }
 
     // TASA POR PERIODO
 
